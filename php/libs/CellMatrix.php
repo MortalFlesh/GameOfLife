@@ -44,6 +44,11 @@ class CellMatrix {
 		return $this;
 	}
 
+	/**
+	 * @param int $x
+	 * @param int $y
+	 * @return Cell
+	 */
 	private function cellLifeCycle($x, $y) {
 		$currentCell = $this->matrix[$x][$y];
 		$surroundings = $this->getSurroundings($x, $y);
@@ -127,7 +132,7 @@ class CellMatrix {
 			foreach($this->matrix as $row) {
 				?><tr><?
 					foreach($row as $cell) {
-						?><td><?=$cell->getType()?></td><?
+						?><td<?=($cell->isDead() ? ' class="dead"' : '')?>><?=$cell->getType()?></td><?
 					}
 				?></tr><?
 			}
