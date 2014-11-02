@@ -8,8 +8,10 @@ class Program {
 		$world = new GameOfLife($universe, new CellMatrix($universe, $god));
 
 		$world->setWorldEnvironment(CellMatrix::createRandomWorld($universe, $god));
+		$world->renderWorld();
 		$newWorld = $world->live();
-
+		$newWorld->render();
+		
 		$universe->saveNewWorld($newWorld);
 	}
 
@@ -23,27 +25,19 @@ class Program {
 			[new Cell(3, 1, 0), new Cell(1, 1, 1), new Cell(3, 1, 2)],
 			[new Cell(2, 2, 0), new Cell(2, 2, 1), new Cell(1, 2, 2)],
 		]);
-		$newWorld = $world->live();
 
+		$world->renderWorld();
+		$newWorld = $world->live($render = true);
+
+		$newWorld->render();
 		$newWorldMatrix = $newWorld->serialize();
 
-		$happyResult1 = [
-			[new Cell(Cell::DEAD, 0, 0), new Cell(Cell::DEAD, 0, 1), new Cell(Cell::DEAD, 0, 2)],
-			[new Cell(1, 1, 0), new Cell(Cell::DEAD, 1, 1), new Cell(1, 1, 2)],
-			[new Cell(Cell::DEAD, 2, 0), new Cell(1, 2, 1), new Cell(Cell::DEAD, 2, 2)],
-		];
-		$happyResult2 = [
+		$happyResult = [
 			[new Cell(1, 0, 0), new Cell(1, 0, 1), new Cell(Cell::DEAD, 0, 2)],
 			[new Cell(1, 1, 0), new Cell(1, 1, 1), new Cell(Cell::DEAD, 1, 2)],
 			[new Cell(Cell::DEAD, 2, 0), new Cell(Cell::DEAD, 2, 1), new Cell(Cell::DEAD, 2, 2)],
 		];
-
-		$result = $this->testResults($newWorldMatrix, $happyResult1);
-		$result['type'] = 1;
-		if ($result['status'] !== true) {
-			$result = $this->testResults($newWorldMatrix, $happyResult2);
-			$result['type'] = 2;
-		}
+		$result = $this->testResults($newWorldMatrix, $happyResult);
 		
 		var_dump('TEST:', $result);
 	}

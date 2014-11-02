@@ -27,4 +27,14 @@ class CellBuilder {
 		$type = rand(Cell::DEAD + 1, $this->spieces);
 		return new Cell($type, $x, $y);
 	}
+
+	/**
+	 * @param int $type
+	 * @param int $x
+	 * @param int $y
+	 * @return Cell
+	 */
+	public function createCell($type, $x, $y) {
+		return new Cell($type, $x, $y);
+	}
 }

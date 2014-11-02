@@ -1,0 +1,15 @@
+.world {
+	margin-top: 20px;
+}
+.world tr {
+	height: 10px;
+}
+.world tr td {
+	text-align: center;
+	vertical-align: central;
+	border: 1px solid black;
+	padding: 2px;
+	margin: 2px;
+	height: 20px;
+	width: 20px;
+}

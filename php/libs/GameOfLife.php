@@ -22,11 +22,22 @@ class GameOfLife {
 		$this->world->setWorld($environment);
 	}
 
-	/** @return CellMatrix */
-	public function live() {
+	/**
+	 * @param bool $render
+	 * @return CellMatrix
+	 */
+	public function live($render = false) {
 		for($i = 0; $i < $this->iterations; $i++) {
 			$this->world->liveCycle();
+
+			if ($render) {
+				$this->renderWorld();
+			}
 		}
 		return $this->world;
+	}
+
+	public function renderWorld() {
+		$this->world->render();
 	}
 }

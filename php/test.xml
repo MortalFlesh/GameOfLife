@@ -3,7 +3,7 @@
     <world>
         <cells>3</cells>
         <species>3</species>
-        <iterations>0</iterations>
+        <iterations>3</iterations>
     </world>
     <organisms>
     </organisms>

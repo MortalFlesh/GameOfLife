@@ -38,11 +38,65 @@ class CellMatrix {
 		return $world;
 	}
 
+	/** @return CellMatrix */
 	public function liveCycle() {
-		$this->matrix = $this->liveCycleEvent(function($x, $y){
-			// todo
-			return $this->god->createRandomCell($x, $y);
-		});
+		$this->matrix = $this->liveCycleEvent([$this, 'cellLifeCycle']);
+		return $this;
+	}
+
+	private function cellLifeCycle($x, $y) {
+		$currentCell = $this->matrix[$x][$y];
+		$surroundings = $this->getSurroundings($x, $y);
+
+		if ($currentCell->isDead()) {
+			$typesToBirth = array_keys($surroundings, 3, true);
+			$typesToBirthCount = count($typesToBirth);
+
+			if ($typesToBirthCount === 1) {
+				return $this->god->createCell($typesToBirth[0], $x, $y);
+			} elseif ($typesToBirthCount > 1) {
+				return $this->god->createRandomCell($x, $y);
+			}
+		} else {
+			$cellType = $currentCell->getType();
+			$currentCellTypeAround = (array_key_exists($cellType, $surroundings) ? $surroundings[$cellType] : 0);
+
+			if ((count($surroundings) > 0 && max($surroundings) >= 4) || $currentCellTypeAround < 2) {
+				return $this->god->createDeadCell($x, $y);
+			}
+		}
+		return $currentCell;
+	}
+
+	/**
+	 * @param int $x
+	 * @param int $y
+	 * @return array [type => count]
+	 */
+	private function getSurroundings($x, $y) {
+		$surroundings = array();
+		for($sx = -1; $sx < 2; $sx++) {
+			for($sy = -1; $sy < 2; $sy++) {
+				$posX = $sx + $x;
+				$posY = $sy + $y;
+
+				if ($posX < 0 || $posY < 0 || ($posX === $x && $posY === $y) || $posX >= $this->cells || $posY >= $this->cells) {
+					continue;
+				}
+
+				$currentCell = $this->matrix[$posX][$posY];
+				if ($currentCell->isDead()) {
+					continue;
+				}
+
+				$type = $currentCell->getType();
+				if (!array_key_exists($type, $surroundings)) {
+					$surroundings[$type] = 0;
+				}
+				$surroundings[$type]++;
+			}
+		}
+		return $surroundings;
 	}
 
 	/** @return Cell[][] */
@@ -64,6 +118,22 @@ class CellMatrix {
 		return $world->liveCycleEvent(function($x, $y) use ($god) {
 			return $god->createRandomCell($x, $y);
 		});
+	}
+
+	public function render() {
+		?>
+		<table class="world">
+			<?
+			foreach($this->matrix as $row) {
+				?><tr><?
+					foreach($row as $cell) {
+						?><td><?=$cell->getType()?></td><?
+					}
+				?></tr><?
+			}
+			?>
+		</table>
+		<?
 	}
 
 }
