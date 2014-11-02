@@ -4,8 +4,7 @@ class Program {
 
 	public function main() {
 		$universe = new Config(new XmlParser());
-		$god = new CellBuilder($universe);
-		$world = new GameOfLife($universe, new CellMatrix($universe, $god), $god);
+		$world = new GameOfLife($universe, new CellMatrix($universe, new CellBuilder($universe)));
 
 		$newWorld = $world->live();
 

@@ -8,20 +8,15 @@ class GameOfLife {
 	/** @var CellMatrix */
 	private $world;
 
-	/** @var CellBuilder */
-	private $god;
-
 	/**
 	 * @param Config $universe
 	 * @param CellMatrix $world
-	 * @param CellBuilder $god
 	 */
-	public function __construct(Config $universe, CellMatrix $world, CellBuilder $god) {
+	public function __construct(Config $universe, CellMatrix $world) {
 		$this->iterations = $universe->getIterations();
 		$this->cells = $universe->getCells();
 
 		$this->world = $world;
-		$this->god = $god;
 	}
 
 	/** @return CellMatrix */

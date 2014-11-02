@@ -42,7 +42,6 @@ class CellMatrix {
 		return $world;
 	}
 
-	/** @return Cell[][] */
 	public function liveCycle() {
 		$this->matrix = $this->liveCycleEvent(function($x, $y){
 			return $this->god->createRandomCell($x, $y);
