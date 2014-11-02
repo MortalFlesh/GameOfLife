@@ -10,9 +10,17 @@ class Config {
 	/** @var SimpleXMLElement */
 	private $configXml;
 
-	/** @param XmlParser $xmlParser */
-	public function __construct(XmlParser $xmlParser) {
+	private $in, $out;
+
+	/**
+	 * @param XmlParser $xmlParser
+	 * @param string $in
+	 * @param string $out
+	 */
+	public function __construct(XmlParser $xmlParser, $in = self::CONFIG_FILE, $out = self::OUTPUT_FILE) {
 		$this->xmlParser = $xmlParser;
+		$this->in = $in;
+		$this->out = $out;
 	}
 
 	/** @return int */
@@ -23,7 +31,7 @@ class Config {
 
 	private function readConfig() {
 		if (!isset($this->configXml)) {
-			$this->configXml = $this->xmlParser->loadXml(__DIR__ . '/../' . self::CONFIG_FILE);
+			$this->configXml = $this->xmlParser->loadXml(__DIR__ . '/../' . $this->in);
 		}
 	}
 
@@ -58,6 +66,6 @@ class Config {
 			}
 		}
 
-		$this->xmlParser->saveXml(__DIR__ . '/../' . self::OUTPUT_FILE, $xml);
+		$this->xmlParser->saveXml(__DIR__ . '/../' . $this->out, $xml);
 	}
 }

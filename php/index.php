@@ -9,4 +9,9 @@ $loader->setCacheStorage(new Nette\Caching\Storages\FileStorage(__DIR__ . '/cach
 $loader->register();
 
 $program = new Program();
-$program->main();
+
+if (isset($_GET['test']) && $_GET['test'] = 1) {
+	$program->test();
+} else {
+	$program->main();
+}

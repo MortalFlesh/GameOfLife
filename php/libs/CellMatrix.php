@@ -17,15 +17,11 @@ class CellMatrix {
 	public function __construct(Config $universe, CellBuilder $god) {
 		$this->cells = $universe->getCells();
 		$this->god = $god;
-
-		$this->matrix = $this->createEmptyWorld();
 	}
 
-	/** @return Cell[][] */
-	private function createEmptyWorld() {
-		return $this->liveCycleEvent(function($x, $y){
-			return $this->god->createDeadCell($x, $y);
-		});
+	/** @param Cell[][] $environment */
+	public function setWorld(array $environment) {
+		$this->matrix = $environment;
 	}
 
 	/**
@@ -44,6 +40,7 @@ class CellMatrix {
 
 	public function liveCycle() {
 		$this->matrix = $this->liveCycleEvent(function($x, $y){
+			// todo
 			return $this->god->createRandomCell($x, $y);
 		});
 	}
@@ -52,4 +49,21 @@ class CellMatrix {
 	public function serialize() {
 		return $this->matrix;
 	}
+
+	/** @return Cell[][] */
+	public static function createEmptyWorld(Config $universe, CellBuilder $god) {
+		$world = new CellMatrix($universe, $god);
+		return $world->liveCycleEvent(function($x, $y) use ($god) {
+			return $god->createDeadCell($x, $y);
+		});
+	}
+
+	/** @return Cell[][] */
+	public static function createRandomWorld(Config $universe, CellBuilder $god) {
+		$world = new CellMatrix($universe, $god);
+		return $world->liveCycleEvent(function($x, $y) use ($god) {
+			return $god->createRandomCell($x, $y);
+		});
+	}
+
 }

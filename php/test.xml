@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<life>
+    <world>
+        <cells>3</cells>
+        <species>3</species>
+        <iterations>0</iterations>
+    </world>
+    <organisms>
+    </organisms>
+</life>
