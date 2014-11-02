@@ -27,12 +27,20 @@ class GameOfLife {
 	 * @return CellMatrix
 	 */
 	public function live($render = false) {
+		$lastHash = '';
 		for($i = 0; $i < $this->iterations; $i++) {
-			$this->world->liveCycle();
+			$newHash = $this->world
+				->liveCycle()
+				->getHash();
 
 			if ($render) {
 				$this->renderWorld();
 			}
+			
+			if ($lastHash === $newHash) {
+				break;
+			}
+			$lastHash = $newHash;
 		}
 		return $this->world;
 	}

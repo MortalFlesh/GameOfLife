@@ -7,7 +7,7 @@ class Program {
 		$god = new CellBuilder($universe);
 		$world = new GameOfLife($universe, new CellMatrix($universe, $god));
 
-		$world->setWorldEnvironment(CellMatrix::createRandomWorld($universe, $god));
+		$world->setWorldEnvironment(CellMatrix::loadWorldFromConfig($universe, $god));
 		$world->renderWorld();
 		$newWorld = $world->live();
 		$newWorld->render();

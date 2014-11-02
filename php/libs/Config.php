@@ -47,6 +47,42 @@ class Config {
 		return (int)$this->configXml->world->iterations;
 	}
 
+	/** @return array [x][y]=>type */
+	public function getOrganisms() {
+		$organisms = array();
+
+		$this->readConfig();
+		$organismsNode = $this->configXml->organisms;
+		/* @var $organismsNode SimpleXMLElement */
+		foreach($organismsNode->children() as $organism) {
+			$x = (int)$organism->x_pos;
+			$y = (int)$organism->y_pos;
+			$type = (string)$organism->species;
+
+			$this->initArray($organisms[$x]);
+			$organisms[$x][$y] = $this->getSpieces($type);
+		}
+		return $organisms;
+	}
+
+	private function initArray(&$array) {
+		if (!is_array($array)) {
+			$array = [];
+		}
+	}
+
+	private function getSpieces($type) {
+		switch($type) {
+			case 'A': return 1;
+			case 'B': return 2;
+			case 'C': return 3;
+			case 'D': return 4;
+			case 'E': return 5;
+			case 'F': return 6;
+			case 'G': return 7;
+		}
+	}
+
 	/** @param CellMatrix $newWorld */
 	public function saveNewWorld(CellMatrix $newWorld) {
 		$xml = new SimpleXMLElement('<xml/>');

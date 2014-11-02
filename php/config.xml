@@ -1,10 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <life>
     <world>
-        <cells>3</cells>
+		<!--Dimension of the square "world"-->
+        <cells>30</cells>
+
+		<!--Number of distinct species-->
         <species>5</species>
-        <iterations>10</iterations>
+
+		<!--Number of iterations to be calculated-->
+        <iterations>4000000</iterations>
     </world>
     <organisms>
+        <organism>
+            <x_pos>5</x_pos>
+            <y_pos>5</y_pos>
+            <species>A</species>
+        </organism>
+        <organism>
+            <x_pos>4</x_pos>
+            <y_pos>3</y_pos>
+            <species>C</species>
+        </organism>
+        <organism>
+            <x_pos>1</x_pos>
+            <y_pos>1</y_pos>
+            <species>B</species>
+        </organism>
+        <organism>
+            <x_pos>1</x_pos>
+            <y_pos>2</y_pos>
+            <species>B</species>
+        </organism>
+        <organism>
+            <x_pos>2</x_pos>
+            <y_pos>2</y_pos>
+            <species>B</species>
+        </organism>
+        <organism>
+            <x_pos>2</x_pos>
+            <y_pos>1</y_pos>
+            <species>B</species>
+        </organism>
+        <organism>
+            <x_pos>2</x_pos>
+            <y_pos>3</y_pos>
+            <species>B</species>
+        </organism>
+        <organism>
+            <x_pos>2</x_pos>
+            <y_pos>4</y_pos>
+            <species>B</species>
+        </organism>
+        <organism>
+            <x_pos>2</x_pos>
+            <y_pos>5</y_pos>
+            <species>C</species>
+        </organism>
+        <organism>
+            <x_pos>2</x_pos>
+            <y_pos>6</y_pos>
+            <species>C</species>
+        </organism>
+        <organism>
+            <x_pos>3</x_pos>
+            <y_pos>1</y_pos>
+            <species>C</species>
+        </organism>
+        <organism>
+            <x_pos>3</x_pos>
+            <y_pos>2</y_pos>
+            <species>C</species>
+        </organism>
+        <organism>
+            <x_pos>3</x_pos>
+            <y_pos>3</y_pos>
+            <species>B</species>
+        </organism>
+        <organism>
+            <x_pos>3</x_pos>
+            <y_pos>4</y_pos>
+            <species>A</species>
+        </organism>
+        <organism>
+            <x_pos>3</x_pos>
+            <y_pos>5</y_pos>
+            <species>A</species>
+        </organism>
+        <organism>
+            <x_pos>3</x_pos>
+            <y_pos>6</y_pos>
+            <species>A</species>
+        </organism>
+        <organism>
+            <x_pos>3</x_pos>
+            <y_pos>7</y_pos>
+            <species>B</species>
+        </organism>
+        <organism>
+            <x_pos>4</x_pos>
+            <y_pos>1</y_pos>
+            <species>C</species>
+        </organism>
+        <organism>
+            <x_pos>4</x_pos>
+            <y_pos>3</y_pos>
+            <species>C</species>
+        </organism>
+        <organism>
+            <x_pos>4</x_pos>
+            <y_pos>4</y_pos>
+            <species>C</species>
+        </organism>
+        <organism>
+            <x_pos>5</x_pos>
+            <y_pos>5</y_pos>
+            <species>C</species>
+        </organism>
     </organisms>
 </life>

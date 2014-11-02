@@ -109,6 +109,17 @@ class CellMatrix {
 		return $this->matrix;
 	}
 
+	/** @return string */
+	public function getHash() {
+		$hash = '';
+		foreach($this->matrix as $row) {
+			foreach($row as $cell) {
+				$hash .= $cell->getType();
+			}
+		}
+		return $hash;
+	}
+
 	/** @return Cell[][] */
 	public static function createEmptyWorld(Config $universe, CellBuilder $god) {
 		$world = new CellMatrix($universe, $god);
@@ -122,6 +133,23 @@ class CellMatrix {
 		$world = new CellMatrix($universe, $god);
 		return $world->liveCycleEvent(function($x, $y) use ($god) {
 			return $god->createRandomCell($x, $y);
+		});
+	}
+
+	/**
+	 * @param Config $universe
+	 * @param CellBuilder $god
+	 * @return Cell[][]
+	 */
+	public static function loadWorldFromConfig(Config $universe, CellBuilder $god) {
+		$world = new CellMatrix($universe, $god);
+		$organisms = $universe->getOrganisms();
+
+		return $world->liveCycleEvent(function($x, $y) use ($organisms, $god) {
+			if (isset($organisms[$x][$y])) {
+				return $god->createCell($organisms[$x][$y], $x, $y);
+			}
+			return $god->createDeadCell($x, $y);
 		});
 	}
 

@@ -24,7 +24,7 @@ class CellBuilder {
 	 * @return Cell
 	 */
 	public function createRandomCell($x, $y) {
-		$type = rand(Cell::DEAD + 1, $this->spieces);
+		$type = rand(Cell::DEAD, $this->spieces);
 		return new Cell($type, $x, $y);
 	}
 
