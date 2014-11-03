@@ -120,7 +120,11 @@ class CellMatrix {
 		return $hash;
 	}
 
-	/** @return Cell[][] */
+	/**
+	 * @param Config $universe
+	 * @param CellBuilder $god
+	 * @return Cell[][]
+	 */
 	public static function createEmptyWorld(Config $universe, CellBuilder $god) {
 		$world = new CellMatrix($universe, $god);
 		return $world->liveCycleEvent(function($x, $y) use ($god) {
@@ -128,7 +132,11 @@ class CellMatrix {
 		});
 	}
 
-	/** @return Cell[][] */
+	/**
+	 * @param Config $universe
+	 * @param CellBuilder $god
+	 * @return Cell[][]
+	 */
 	public static function createRandomWorld(Config $universe, CellBuilder $god) {
 		$world = new CellMatrix($universe, $god);
 		return $world->liveCycleEvent(function($x, $y) use ($god) {
@@ -139,11 +147,110 @@ class CellMatrix {
 	/**
 	 * @param Config $universe
 	 * @param CellBuilder $god
+	 * @param int $type 1 | 2 | 3
 	 * @return Cell[][]
 	 */
-	public static function loadWorldFromConfig(Config $universe, CellBuilder $god) {
+	public static function createOscilator(Config $universe, CellBuilder $god, $type) {
+		$oscilator1 = CellMatrix::createEmptyWorld($universe, $god);
+		$oscilator1[2][1] = $god->createCell(1, 2, 1);
+		$oscilator1[2][2] = $god->createCell(1, 2, 2);
+		$oscilator1[2][3] = $god->createCell(1, 2, 3);
+
+		$oscilator2 = CellMatrix::createEmptyWorld($universe, $god);
+		$oscilator2[2][2] = $god->createCell(1, 2, 2);
+		$oscilator2[2][3] = $god->createCell(1, 2, 3);
+		$oscilator2[2][4] = $god->createCell(1, 2, 4);
+		$oscilator2[3][1] = $god->createCell(1, 3, 1);
+		$oscilator2[3][2] = $god->createCell(1, 3, 2);
+		$oscilator2[3][3] = $god->createCell(1, 3, 3);
+
+		$oscilator3 = CellMatrix::createEmptyWorld($universe, $god);
+		$oscilator3[1][1] = $god->createCell(1, 1, 1);
+		$oscilator3[1][2] = $god->createCell(1, 1, 2);
+		$oscilator3[2][1] = $god->createCell(1, 2, 1);
+		$oscilator3[2][2] = $god->createCell(1, 2, 2);
+		$oscilator3[3][3] = $god->createCell(1, 3, 3);
+		$oscilator3[3][4] = $god->createCell(1, 3, 4);
+		$oscilator3[4][3] = $god->createCell(1, 4, 3);
+		$oscilator3[4][4] = $god->createCell(1, 4, 4);
+
+		return ${'oscilator' . $type};
+	}
+
+	/**
+	 * @param Config $universe
+	 * @param CellBuilder $god
+	 * @return Cell[][]
+	 */
+	public static function createPulzar(Config $universe, CellBuilder $god) {
+		$pulzar = CellMatrix::createEmptyWorld($universe, $god);
+		$pulzar[2][4] = $god->createCell(1, 2, 4);
+		$pulzar[2][5] = $god->createCell(1, 2, 5);
+		$pulzar[2][6] = $god->createCell(1, 2, 6);
+		$pulzar[2][10] = $god->createCell(1, 2, 10);
+		$pulzar[2][11] = $god->createCell(1, 2, 11);
+		$pulzar[2][12] = $god->createCell(1, 2, 12);
+
+		$pulzar[4][2] = $god->createCell(1, 4, 2);
+		$pulzar[4][7] = $god->createCell(1, 4, 7);
+		$pulzar[4][9] = $god->createCell(1, 4, 9);
+		$pulzar[4][14] = $god->createCell(1, 4, 14);
+		$pulzar[5][2] = $god->createCell(1, 5, 2);
+		$pulzar[5][7] = $god->createCell(1, 5, 7);
+		$pulzar[5][9] = $god->createCell(1, 5, 9);
+		$pulzar[5][14] = $god->createCell(1, 5, 14);
+		$pulzar[6][2] = $god->createCell(1, 6, 2);
+		$pulzar[6][7] = $god->createCell(1, 6, 7);
+		$pulzar[6][9] = $god->createCell(1, 6, 9);
+		$pulzar[6][14] = $god->createCell(1, 6, 14);
+
+		$pulzar[7][4] = $god->createCell(1, 7, 4);
+		$pulzar[7][5] = $god->createCell(1, 7, 5);
+		$pulzar[7][6] = $god->createCell(1, 7, 6);
+		$pulzar[7][10] = $god->createCell(1, 7, 10);
+		$pulzar[7][11] = $god->createCell(1, 7, 11);
+		$pulzar[7][12] = $god->createCell(1, 7, 12);
+
+		// *******************************************
+
+		$pulzar[9][4] = $god->createCell(1, 9, 4);
+		$pulzar[9][5] = $god->createCell(1, 9, 5);
+		$pulzar[9][6] = $god->createCell(1, 9, 6);
+		$pulzar[9][10] = $god->createCell(1, 9, 10);
+		$pulzar[9][11] = $god->createCell(1, 9, 11);
+		$pulzar[9][12] = $god->createCell(1, 9, 12);
+
+		$pulzar[10][2] = $god->createCell(1, 10, 2);
+		$pulzar[10][7] = $god->createCell(1, 10, 7);
+		$pulzar[10][9] = $god->createCell(1, 10, 9);
+		$pulzar[10][14] = $god->createCell(1, 10, 14);
+		$pulzar[11][2] = $god->createCell(1, 11, 2);
+		$pulzar[11][7] = $god->createCell(1, 11, 7);
+		$pulzar[11][9] = $god->createCell(1, 11, 9);
+		$pulzar[11][14] = $god->createCell(1, 11, 14);
+		$pulzar[12][2] = $god->createCell(1, 12, 2);
+		$pulzar[12][7] = $god->createCell(1, 12, 7);
+		$pulzar[12][9] = $god->createCell(1, 12, 9);
+		$pulzar[12][14] = $god->createCell(1, 12, 14);
+
+		$pulzar[14][4] = $god->createCell(1, 14, 4);
+		$pulzar[14][5] = $god->createCell(1, 14, 5);
+		$pulzar[14][6] = $god->createCell(1, 14, 6);
+		$pulzar[14][10] = $god->createCell(1, 14, 10);
+		$pulzar[14][11] = $god->createCell(1, 14, 11);
+		$pulzar[14][12] = $god->createCell(1, 14, 12);
+
+		return $pulzar;
+	}
+
+	/**
+	 * @param Config $universe
+	 * @param CellBuilder $god
+	 * @return Cell[][]
+	 */
+	public static function loadWorldFromConfig(Config $universe, CellBuilder $god, $file = null) {
 		$world = new CellMatrix($universe, $god);
-		$organisms = $universe->getOrganisms();
+		$organisms = $universe->getOrganisms($file);
 
 		return $world->liveCycleEvent(function($x, $y) use ($organisms, $god) {
 			if (isset($organisms[$x][$y])) {

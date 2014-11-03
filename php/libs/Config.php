@@ -95,6 +95,10 @@ class Config {
 
 		foreach($newWorld->serialize() as $row) {
 			foreach($row as $cell) {
+				if ($cell->isDead()) {
+					continue;
+				}
+
 				$organism = $organisms->addChild('organism');
 				$organism->addChild('x_pos', $cell->getX());
 				$organism->addChild('y_pos', $cell->getY());

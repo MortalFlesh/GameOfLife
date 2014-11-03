@@ -1,5 +1,6 @@
 .world {
 	margin-top: 20px;
+	border-spacing: 0px;
 }
 .world tr {
 	height: 10px;
@@ -9,10 +10,10 @@
 	vertical-align: central;
 	border: 1px solid black;
 	padding: 2px;
-	margin: 2px;
 	height: 20px;
 	width: 20px;
 }
 .world tr td.dead {
-	background: #CCC;
+	background: #333;
+	color: #222;
 }
