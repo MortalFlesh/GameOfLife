@@ -248,9 +248,9 @@ class CellMatrix {
 	 * @param CellBuilder $god
 	 * @return Cell[][]
 	 */
-	public static function loadWorldFromConfig(Config $universe, CellBuilder $god, $file = null) {
+	public static function loadWorldFromConfig(Config $universe, CellBuilder $god) {
 		$world = new CellMatrix($universe, $god);
-		$organisms = $universe->getOrganisms($file);
+		$organisms = $universe->getOrganisms();
 
 		return $world->liveCycleEvent(function($x, $y) use ($organisms, $god) {
 			if (isset($organisms[$x][$y])) {

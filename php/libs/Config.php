@@ -80,18 +80,19 @@ class Config {
 			case 'E': return 5;
 			case 'F': return 6;
 			case 'G': return 7;
+			default: return $type;
 		}
 	}
 
 	/** @param CellMatrix $newWorld */
 	public function saveNewWorld(CellMatrix $newWorld) {
-		$xml = new SimpleXMLElement('<xml/>');
-		$life = $xml->addChild('life');
-		$life->addChild('cell', $this->getCells());
-		$life->addChild('species', $this->getSpecies());
-		$life->addChild('iterations', $this->getIterations());
+		$life = new SimpleXMLElement('<life/>');
+		$world = $life->addChild('world');
+		$world->addChild('cells', $this->getCells());
+		$world->addChild('species', $this->getSpecies());
+		$world->addChild('iterations', $this->getIterations());
 
-		$organisms = $xml->addChild('organisms');
+		$organisms = $life->addChild('organisms');
 
 		foreach($newWorld->serialize() as $row) {
 			foreach($row as $cell) {
@@ -106,6 +107,6 @@ class Config {
 			}
 		}
 
-		$this->xmlParser->saveXml(__DIR__ . '/../' . $this->out, $xml);
+		$this->xmlParser->saveXml(__DIR__ . '/../' . $this->out, $life);
 	}
 }
